@@ -1,0 +1,372 @@
+@use 'fullpage.js/dist/fullpage';
+@use '@glidejs/glide/src/assets/sass/glide.core';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --dashed-border: 2px dashed rgba(255, 255, 255, 0.25);
+}
+
+body {
+  color: #ffffff;
+  font-family: 'Ubuntu', sans-serif;
+  padding: 1rem;
+  background-repeat: repeat;
+  background-image: url('../images/background.svg');
+
+  @media screen and (min-width: 960px) {
+    padding: 2rem;
+  }
+}
+
+a {
+  color: #22248d;
+}
+
+body > header svg {
+  width: 72px;
+  margin-left: -0.25rem;
+}
+
+body > header > section {
+  position: static;
+  max-width: 1024px;
+  margin: auto;
+  padding: 1rem;
+}
+
+body.ippm--home > header > section {
+  position: fixed;
+  z-index: 9;
+  width: 100%;
+  max-width: none;
+}
+
+main,
+main > section {
+  @media screen and (min-width: 960px) {
+    min-height: 100vh !important;
+  }
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 8rem;
+}
+
+main > h1 {
+  display: none;
+}
+
+main > section {
+  display: flex;
+  justify-content: center;
+}
+
+main > section > div {
+  width: 100%;
+  max-width: 1280px;
+  display: block;
+  align-self: center;
+}
+
+main > section > div > h2 {
+  font-size: 2rem;
+  font-weight: 400;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+
+  @media screen and (min-width: 960px) {
+    display: none;
+  }
+}
+
+main > section[data-anchor="screenshots"] > div {
+  width: 100%;
+  max-width: 100%;
+}
+
+main > section > article {
+  min-width: calc(940px + 2rem);
+  padding: 1rem;
+  margin-bottom: 10rem;
+  border: var(--dashed-border);
+}
+
+ippm-banner {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+
+  @media screen and (min-width: 960px) {
+    display: grid;
+    gap: 0.5rem;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin: 0;
+
+    @media screen and (min-width: 960px) {
+      font-size: 2.5rem;
+    }
+  }
+
+  h2 {
+    font-size: 0.9rem;
+    margin: 0;
+    font-weight: normal;
+  }
+
+  a {
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+body:not([data-current-anchor="intro"]) ippm-banner {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+ippm-intro {
+  display: grid;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+
+  @media screen and (min-width: 960px) {
+    gap: 2rem;
+    grid-template-columns: auto 1fr;
+    padding: 0;
+    max-width: 960px;
+  }
+
+  h2 {
+    // font-size: 3.5rem;
+    font-size: clamp(2.5rem, 2.5vw, 3.5rem);
+    margin: 0;
+    animation: slideLeft ease-in-out 0.5s;
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0;
+    opacity: 0;
+    transform: translateX(2rem);
+    animation: slideLeft ease-in-out 0.5s 0.25s forwards;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    opacity: 0;
+    margin-top: 2rem;
+    transform: translateX(2rem);
+    animation: slideLeft ease-in-out 0.5s 0.5s forwards;
+  }
+
+  ippm-button {
+    --background-color: #22248d;
+
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateY(2rem);
+    animation: slideUp ease-in-out 0.5s 0.75s forwards;
+  }
+}
+
+ippm-demo-cards {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  border: var(--dashed-border);
+
+  @media screen and (min-width: 960px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+ippm-gallery {
+  display: block;
+}
+
+ippm-gallery-container {
+  display: block;
+  padding: 1rem;
+  max-width: 1280px;
+  margin: auto;
+  border: var(--dashed-border);
+
+  select {
+    color: white;
+    border: 1px solid white;
+    font-weight: bold;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    appearance: none;
+    background: transparent;
+  }
+
+  option {
+    color: black;
+  }
+
+  label {
+    position: relative;
+  }
+
+  label::before {
+    content: "‹";
+    font-size: 2rem;
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%) rotate(270deg);
+  }
+}
+
+ippm-screenshots {
+  --max-height: 500px;
+
+  display: block;
+
+  @media screen and (min-width: 960px) {
+    margin-top: -8rem;
+  }
+
+  ippm-screenshots-bullets {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+    font-size: 2rem;
+  }
+
+  ippm-screenshots-bullet {
+    cursor: pointer;
+    opacity: 0.75;
+  }
+
+  ippm-screenshots-directional {
+    cursor: pointer;
+    padding: 0 0.25rem;
+  }
+
+  .glide__bullet--active {
+    opacity: 1;
+  }
+
+  .glide__track,
+  .glide__slides {
+    overflow: visible;
+  }
+
+  .glide__track {
+    display: block;
+  }
+
+  .glide__slides {
+    height: 150%;
+    align-items: center;
+  }
+
+  .glide__slide {
+    height: auto;
+    transition: transform 300ms ease;
+  }
+
+  .glide__slide--active {
+    @media screen and (min-width: 960px) {
+      transform: scale(1.5);
+      box-shadow: 8px 8px 0 #5c0029, -8px -8px 0 #5c0029;
+    }
+  }
+}
+
+ippm-modal {
+  figure {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    margin: 0;
+    padding: 2rem 1rem;
+    background: white;
+    box-sizing: border-box;
+  }
+
+  img {
+    cursor: pointer;
+    max-width: 100%;
+  }
+}
+
+ippm-faqs {
+  display: grid;
+  gap: 1rem;
+  max-height: 80vh;
+  overflow: auto;
+  padding: 1rem;
+  max-width: 1280px;
+  margin: auto;
+  border: var(--dashed-border);
+
+  @media screen and (min-width: 960px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  p {
+    line-height: 1.5;
+  }
+
+  details {
+    color: #2e3329;
+    padding: 1rem;
+    background: white;
+  }
+
+  summary {
+    cursor: pointer;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

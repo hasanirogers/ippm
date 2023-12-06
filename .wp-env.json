@@ -1,0 +1,14 @@
+{
+  "core": null,
+  "themes": ["./ippm"],
+  "plugins": ["../../../Pluginspaces/Wordpress/interactive-posts-ippm/interactive-posts-ippm"],
+  "port": 3338,
+  "testsPort": 3339,
+  "config": {
+    "FS_METHOD": "direct"
+  },
+  "mappings": {
+    ".htaccess": "./.htaccess"
+  }
+}
+

@@ -1,0 +1,20 @@
+{
+  "name": "ippm",
+  "version": "1.0.0",
+  "description": "IPPM Theme",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node deploy.js -t ippm",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wp-env start --update",
+    "stop": "wp-env stop",
+    "wp-env": "wp-env"
+  },
+  "author": "Hasani Rogers <dev@hasanirogers.me>",
+  "license": "ISC",
+  "devDependencies": {
+    "@wordpress/env": "^8.10.0",
+    "dotenv": "^16.3.1",
+    "ssh2-sftp-client": "^9.1.0"
+  }
+}
